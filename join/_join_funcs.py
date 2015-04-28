@@ -20,7 +20,7 @@ class Union(object):
                 setattr(self, name, value)
 
     def __repr__(self):
-        return "Datum({})".format(self.__dict__)
+        return "{}({})".format(self.__class__.__name__, self.__dict__)
 
 
 def tuple_join(left, right):
