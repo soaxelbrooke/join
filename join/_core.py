@@ -55,7 +55,8 @@ def join(left, right, how='inner', key=None, left_key=None, right_key=None,
 
 
 def _inner_join(left, right, left_key_fn, right_key_fn, join_fn=union_join):
-    """
+    """ Inner join using left and right key functions
+
     :param left: left iterable to be joined
     :param right: right iterable to be joined
     :param function left_key_fn: function that produces hashable value from left objects
