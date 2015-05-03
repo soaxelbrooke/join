@@ -31,20 +31,10 @@ def join(left, right, how='inner', key=None, left_key=None, right_key=None,
         return key_fn
 
     if key is not None:
-        if callable(key):
-            lkey, rkey = key, key
-        else:
-            lkey, rkey = make_key_fn(key), make_key_fn(key)
+        lkey = rkey = key if callable(key) else make_key_fn(key)
     else:
-        if callable(left_key):
-            lkey = left_key
-        else:
-            lkey = make_key_fn(left_key)
-
-        if callable(right_key):
-            rkey = right_key
-        else:
-            rkey = make_key_fn(right_key)
+        lkey = left_key if callable(left_key) else make_key_fn(left_key)
+        rkey = right_key if callable(right_key) else make_key_fn(right_key)
 
     try:
         join_impl = {
