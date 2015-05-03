@@ -23,6 +23,15 @@ SQL-style joins for Python iterables.
     >>> catdogs[0].woof
     'Rruff!'
 
+Installation
+------------
+Install using pip:
+
+``pip install join``
+
+Use
+---
+
 ``join`` does the work of associating iterable items together, but gives you all the power for customization, letting you supply your own join function, separate keys for left and right iterables, and even letting you use functions instead of attribute names.
 
 ``merge`` used above, for example, is ``join`` using an object union to join matched objects.  You can use a tuple join, which is default for ``join``:
