@@ -5,7 +5,7 @@ SQL-style joins for Python iterables.
 
 .. code-block:: python
 
-    >>> from join import *
+    >>> from join import join, merge, tuple_join
     >>> dogs = [
     ...     Dog('gatsby', 'Rruff!', 16),
     ...     Dog('ein', 'wruf!', 9),
