@@ -1,11 +1,16 @@
 __author__ = 'stuart'
 
 from collections import defaultdict
-from _join_funcs import union_join
+from ._join_funcs import union_join, tuple_join
+
+
+def merge(left, right, how='inner', key=None, left_key=None, right_key=None):
+    """ Performs a join using the union join function. """
+    return join(left, right, how, key, left_key, right_key, join_fn=union_join)
 
 
 def join(left, right, how='inner', key=None, left_key=None, right_key=None,
-         join_fn=union_join):
+         join_fn=tuple_join):
     """
     :param left: left iterable to be joined
     :param right: right iterable to be joined
