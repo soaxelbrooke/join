@@ -107,14 +107,9 @@ def _right_join(left, right, left_key_fn, right_key_fn, join_fn=union_join):
     :param join_fn: function called on joined left and right iterable items to complete join
     :rtype: list
     """
-    joiner = defaultdict(list)
-    for ele in left:
-        joiner[left_key_fn(ele)].append(ele)
-    joined = []
-    for ele in right:
-        for other in joiner.get(right_key_fn(ele), [None]):
-            joined.append(join_fn(ele, other))
-    return joined
+    def reversed_join_fn(left_ele, right_ele):
+        return join_fn(right_ele, left_ele)
+    return _left_join(right, left, right_key_fn, left_key_fn, reversed_join_fn)
 
 
 def _outer_join(left, right, left_key_fn, right_key_fn, join_fn=union_join):
