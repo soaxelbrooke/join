@@ -46,17 +46,18 @@ def join(left, right, how='inner', key=None, left_key=None, right_key=None,
         else:
             rkey = make_key_fn(right_key)
 
-    if how == 'left':
-        return _left_join(left, right, lkey, rkey, join_fn)
-    elif how == 'right':
-        return _right_join(left, right, lkey, rkey, join_fn)
-    elif how == 'inner':
-        return _inner_join(left, right, lkey, rkey, join_fn)
-    elif how == 'outer':
-        return _outer_join(left, right, lkey, rkey, join_fn)
-    else:
+    try:
+        join_impl = {
+            "left": _left_join,
+            "right": _right_join,
+            "inner": _inner_join,
+            "outer": _outer_join,
+        }.get(how)
+    except KeyError:
         raise ValueError("Invalid value for how: {}, must be left, right, "
                          "inner, or outer.".format(str(how)))
+    else:
+        return join_impl(left, right, lkey, rkey, join_fn)
 
 
 def _inner_join(left, right, left_key_fn, right_key_fn, join_fn=union_join):
