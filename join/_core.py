@@ -42,7 +42,7 @@ def join(left, right, how='inner', key=None, left_key=None, right_key=None,
             "right": _right_join,
             "inner": _inner_join,
             "outer": _outer_join,
-        }.get(how)
+        }[how]
     except KeyError:
         raise ValueError("Invalid value for how: {}, must be left, right, "
                          "inner, or outer.".format(str(how)))
