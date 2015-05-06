@@ -2,4 +2,4 @@ language: python
 python:
   - "3.4"
   - "2.7"
-script:  python test/test_join.py
+script:  python -m test.test_join

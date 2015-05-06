@@ -2,7 +2,8 @@ __author__ = 'stuart'
 
 import unittest
 from collections import namedtuple
-from join import join, merge
+from join import join
+from join import merge
 
 Dog = namedtuple('Dog', ['name', 'woof', 'weight'])
 Cat = namedtuple('Cat', ['name', 'meow', 'weight'])
