@@ -1,7 +1,10 @@
 ====
 JOIN
 ====
-SQL-style joins for Python iterables.
+SQL-style joins for Python iterables. 
+
+.. image:: https://travis-ci.org/StuartAxelOwen/join.svg?branch=master
+    :target: https://travis-ci.org/StuartAxelOwen/join
 
 .. code-block:: python
 
@@ -67,3 +70,7 @@ Using separate key functions is easy too:
     >>> join(cats, dogs, left_key=cat_key, right_key=dog_key, join_fn=name_join)
     ['pleo-ein', 'xena-gatsby', 'gatsby-gatsby']
 
+Contributing
+------------
+
+Pull requests and issues welcome!
