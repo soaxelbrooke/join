@@ -122,7 +122,7 @@ def _outer_join(left, right, left_key_fn, right_key_fn, join_fn=union_join):
 
 def group(iterable, key=lambda ele: ele):
     """ Groups an iterable by a specified attribute, or using a specified key access function.  Returns tuples of grouped elements.
-    
+
     >>> dogs = [Dog('gatsby', 'Rruff!', 15), Dog('william', 'roof', 12), Dog('edward', 'hi', 15)]
     >>> groupby(dogs, 'weight')
     [(Dog('gatsby', 'Rruff!', 15), Dog('edward', 'hi', 15)), (Dog('william', 'roof', 12), )]
@@ -150,4 +150,3 @@ def make_key_fn(key):
         else:
             return getattr(ele, key)
     return key_fn
-
