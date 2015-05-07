@@ -73,4 +73,4 @@ Using separate key functions is easy too:
 Contributing
 ------------
 
-Pull requests and issues welcome!
+Pull requests and issues welcome!  Run tests from project root with ``sh run_tests.sh``.
