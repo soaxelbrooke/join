@@ -22,14 +22,6 @@ def join(left, right, how='inner', key=None, left_key=None, right_key=None,
     if key is None and (left_key is None or right_key is None):
         raise ValueError("Must provide either key param or both left_key and right_key")
 
-    def make_key_fn(_key):
-        def key_fn(ele):
-            if isinstance(ele, dict):
-                return ele[_key]
-            else:
-                return getattr(ele, _key)
-        return key_fn
-
     if key is not None:
         lkey = rkey = key if callable(key) else make_key_fn(key)
     else:
@@ -127,3 +119,35 @@ def _outer_join(left, right, left_key_fn, right_key_fn, join_fn=union_join):
                     yield join_fn(ele, other)
 
     return list(iter_join(left_joiner, right_joiner, keys))
+
+def group(iterable, key=lambda ele: ele):
+    """ Groups an iterable by a specified attribute, or using a specified key access function.  Returns tuples of grouped elements.
+    
+    >>> dogs = [Dog('gatsby', 'Rruff!', 15), Dog('william', 'roof', 12), Dog('edward', 'hi', 15)]
+    >>> groupby(dogs, 'weight')
+    [(Dog('gatsby', 'Rruff!', 15), Dog('edward', 'hi', 15)), (Dog('william', 'roof', 12), )]
+
+    :param iterable: iterable to be grouped
+    :param key: a key-access function or attr name to be used as a group key
+    """
+    if callable(key):
+        return _group(iterable, key)
+    else:
+        return _group(iterable, make_key_fn(key))
+
+
+def _group(iterable, key_fn):
+    groups = defaultdict(list)
+    for ele in iterable:
+        groups[key_fn(ele)].append(ele)
+    return map(tuple, groups.values())
+
+
+def make_key_fn(key):
+    def key_fn(ele):
+        if isinstance(ele, dict):
+            return ele[key]
+        else:
+            return getattr(ele, key)
+    return key_fn
+

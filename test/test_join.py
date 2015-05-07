@@ -4,6 +4,8 @@ import unittest
 from collections import namedtuple
 from join import join
 from join import merge
+from join import group
+
 
 Dog = namedtuple('Dog', ['name', 'woof', 'weight'])
 Cat = namedtuple('Cat', ['name', 'meow', 'weight'])
@@ -42,6 +44,17 @@ class JoinTests(unittest.TestCase):
     def test_outer_join(self):
         outer = merge(dogs, cats, 'outer', 'name')
         self.assertEqual(len(outer), len(dogs) + len(cats) - 1)
+
+
+class GroupByTest(unittest.TestCase):
+    
+    def test_basic_group(self):
+        abcs = 'aabbabccbc'
+        self.assertSequenceEqual(set(group(abcs)), 
+                                 set([('a', 'a', 'a',), ('b', 'b', 'b', 'b'), ('c', 'c', 'c')]))
+
+    def test_func_group(self):
+        self.assertSequenceEqual(set([(1, 3, 5), (0, 2, 4)]), set(group(range(6), lambda n: n % 2)))
 
 
 if __name__ == '__main__':
