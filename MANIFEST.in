@@ -1,0 +1,9 @@
+include setup.cfg
+include setup.py
+include run_tests.sh
+include join/__init__.py
+include join/_core.py
+include join/_join_funcs.py
+include test/test_join.py
+include README.rst
+include LICENSE.txt
