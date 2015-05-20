@@ -10,13 +10,13 @@ with open('LICENSE.txt') as license_file:
 
 setup(name='join',
       packages=['join'],
-      version='0.0.2',
+      version='0.1.1',
       description='SQL-style joins for iterables.',
       long_description=long_description,
       license=license,
       author='Stuart Owen',
       author_email='stuart.owen@gmail.com',
       url='https://github.com/StuartAxelOwen/join',
-      download_url='https://github.com/StuartAxelOwen/join/archive/0.0.2.zip',
+      download_url='https://github.com/StuartAxelOwen/join/archive/0.1.zip',
       keywords=['join', 'joins', 'merge', 'merges', 'list join', 'iterable join'],
       )
