@@ -1,3 +1,5 @@
+from functools import partial
+
 __author__ = 'stuart'
 
 
@@ -37,7 +39,7 @@ def tuple_join(left, right):
     return left, right
 
 
-def union_join(left, right):
+def union_join(left, right, left_as='left', right_as='right'):
     """
     Join function truest to the SQL style join.  Merges both objects together in a sum-type,
     saving references to each parent in ``left`` and ``right`` attributes.
@@ -46,22 +48,30 @@ def union_join(left, right):
         >>> dog = Dog('gatsby', 'Ruff!', 15)
         >>> Cat = namedtuple('Cat', ['name', 'meow', 'weight'])
         >>> cat = Cat('pleo', 'roooowwwr', 12)
-        >>> catdog = union_join(cat, dog)
+        >>> catdog = union_join(cat, dog, 'cat', 'dog')
         >>> catdog.name
         pleo
         >>> catdog.woof
         Ruff!
-        >>> catdog.right.name
+        >>> catdog.dog.name
         gatsby
 
     :param left: left object to be joined with right
     :param right: right object to be joined with left
     :return: joined object with attrs/methods from both parents available
     """
-    joined_class = type(left.__class__.__name__ + right.__class__.__name__, (Union,), {})
     attrs = {}
     attrs.update(get_object_attrs(right))
     attrs.update(get_object_attrs(left))
-    attrs['left'] = left
-    attrs['right'] = right
-    return joined_class(attrs)
+    attrs[left_as] = left
+    attrs[right_as] = right
+    if isinstance(left, dict) and isinstance(right, dict):
+        return attrs
+    else:
+        joined_class = type(left.__class__.__name__ + right.__class__.__name__, (Union,),
+                            {})
+        return joined_class(attrs)
+
+
+def make_union_join(left_as='left', right_as='right'):
+    return partial(union_join, left_as=left_as, right_as=right_as)

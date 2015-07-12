@@ -78,6 +78,15 @@ class JoinTests(unittest.TestCase):
         outer = merge(dogs, cats, 'outer', 'name')
         assert len(outer) == len(dogs) + len(cats) - 1
 
+    def test_merge_naming(self):
+        inner = merge(dogs, cats, 'inner', 'name', left_as='dog', right_as='cat')
+        assert inner[0].name == 'gatsby'
+        assert inner[0].cat.name == 'gatsby'
+        assert inner[0].dog.name == 'gatsby'
+        assert inner[0].weight == 16
+        assert inner[0].cat.weight == 15
+        assert inner[0].dog.weight == 16
+
 
 class GroupByTest(unittest.TestCase):
     
