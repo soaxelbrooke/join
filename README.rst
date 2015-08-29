@@ -70,7 +70,14 @@ Using separate key functions is easy too:
     >>> join(cats, dogs, left_key=cat_key, right_key=dog_key, join_fn=name_join)
     ['pleo-ein', 'xena-gatsby', 'gatsby-gatsby']
 
+See also
+--------
+
+The much larger library Toolz_ contains a similar, but less flexible, ``join`` function.
+
 Contributing
 ------------
 
 Pull requests and issues welcome!  Run tests from project root with ``sh run_tests.sh``.
+
+.. _Toolz: https://pypi.python.org/pypi/toolz
